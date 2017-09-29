@@ -49,19 +49,23 @@ function runLIRI(){
 			liristring = "Ace of Base";
 			console.log(liristring);
 		}
-		spotifyClient.search({ type: 'track', query: liristring, limit: 1 }, function(err, data) {
+		spotifyClient.search({ type: 'track', query: liristring }, function(err, data) {
   		if (err) {
     		return console.log('Error occurred: ' + err);
   		}
   		else{
-  			var songInfo = data.tracks.items[0];
-  			for (var j = 0; j < songInfo.artists.length; j++){
-    			console.log("Name of the Artist: " + songInfo.artists[j].name);
+  			var songInfo = data.tracks.items;
+  			for (var i = 0; i < songInfo.length; i++){
+  			console.log("Song Number: " + (i+1));
+  			for (var j = 0; j < songInfo[i].artists.length; j++){
+    			console.log("Name of the Artist: " + songInfo[i].artists[j].name);
     	}
-        	console.log("Name of the Song: " + songInfo.name);
-        	console.log("Link to the Song on Spotify: " + songInfo.external_urls.spotify);
-        	console.log("Name of the Album: " + songInfo.album.name);
+        	console.log("Name of the Song: " + songInfo[i].name);
+        	console.log("Link to the Song on Spotify: " + songInfo[i].external_urls.spotify);
+        	console.log("Name of the Album: " + songInfo[i].album.name);
+        	console.log("----------------------------");
  	 	}
+ 	 }	
 	});
  }
 
